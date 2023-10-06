@@ -11,7 +11,6 @@ fn main() {
     let mut pix: Rgba<u8> = picture.get_pixel(x, y);
 
     while !(pix[1] == 0 && pix[2] == 0) {
-
         pix = picture.get_pixel(x, y);
 
         let (ch, x_d, y_d) = analyze_pixel(pix);
