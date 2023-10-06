@@ -17,10 +17,10 @@ fn main() {
         out.push(ch);
 
         x += x_d;
-        x = x % picture.width();
+        x %= picture.width();
 
         y += y_d;
-        y = y % picture.height();
+        y %= picture.height();
     }
 
     println!("{}", out);
@@ -33,7 +33,7 @@ fn read_data() -> DynamicImage {
 
     let img = image::open(filename.trim()).unwrap();
 
-    return img;
+    img
 }
 
 fn analyze_pixel(pixel: Rgba<u8>) -> (char, u32, u32) {
@@ -41,5 +41,5 @@ fn analyze_pixel(pixel: Rgba<u8>) -> (char, u32, u32) {
     let x: u32 = pixel[1] as u32;
     let y: u32 = pixel[2] as u32;
 
-    return (ch, x, y);
+    (ch, x, y)
 }
