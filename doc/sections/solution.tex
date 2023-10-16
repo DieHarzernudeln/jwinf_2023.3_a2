@@ -1,0 +1,16 @@
+\section{Lösungsidee}\label{sec:idea}
+\begin{flushleft}
+Die Idee besteht darin zu erst das Bild einzulesen um Zugriff auf die RGB-Werte der einzelnen Pixel zu erhalten.\\
+Man beginnt mit dem Pixel oben links (Aufgabenstellung).\\
+Nun muss nach Aufgabenstellung der R-Wert ausgelesen werden.\\
+Dieser wird in ein ASCII Zeichen umgewandelt und an die Gesamtzeichenkette angehangen.\\
+Nun wird der G- und B- Wert ausgelesen und als x bzw.\ y Verschiebung des neuen Pixels genommen.\\
+
+Die x Kooridnate lässt sich nun über $new\_x = (old\_x + x\_move)\%picture\_width$ berechnen
+Gleiches gilt für y nur das dabei modulo picture\_height gerechnet werden muss.
+Durch berechnen des modulo wird erreicht, dass x bzw.\ y nie größer sind als das echte Bild und die Verschiebung richtig berechnet wird.\\
+Nun wird das Pixel an der Stelle (x|y) abgerufen.\\
+Mit diesem Pixel wiederholt man nun den Ablauf.\\
+Das Ende hat man erreicht wenn $G = B = 0$ gilt.\\
+Als letztes wird die nun finale Zeichenkette ausgegeben.\\
+\end{flushleft}

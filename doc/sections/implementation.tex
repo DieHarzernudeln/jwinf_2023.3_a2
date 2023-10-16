@@ -1,0 +1,33 @@
+\section{Umsetzung}
+Die Umsetzung dieser Aufgabe erfolgte in Rust, einer Programmiersprache, die für ihre Sicherheit, Geschwindigkeit und Nebenläufigkeit bekannt ist.
+
+\subsection{Einlesen der Eingabedaten}
+Die Funktion \texttt{read\_data()} liest das Bild als \texttt{DynamicImage} aus einer Datei deren Pfad als Argument vorgegeben ist oder von der Benutzereingabe stammt.
+Das DynamicImage gibt z.B. Breite, Höhe und Pixel in eine gut verarbeitbare Form.\\
+Dies geschieht über die Nutzung der \texttt{image} Bibliothek von Rust, welche sich für das Laden von allen gängigen Bildformaten eignet.\\
+Dokumentation und SourceCode der Bibliothek: \url{https://docs.rs/image/latest/image/}
+
+\subsection{Analysieren der Pixel}\label{sec:pixel analysis}
+
+Das Analysieren der Pixel geschieht in der Funktion \texttt{analyze\_pixel(pixel: Rgba<u8>) -> (char, u32, u32)}\\
+Dabei wird der R-Wert über eine simple \texttt{as} Konvertierung in ein ASCII Zeichen umgewandelt\\
+(\texttt{pixel[0] as char})
+in dem der u8 Wert als ASCII Zeichenindex interpretiert wird.\\
+Die G (pixel[1]) und B (pixel[2]) Werte werden zusammen mit dem Zeichen als dreigliedriges Tupel zurückgegeben
+
+\subsection{Algorithmus}
+Der Algorithmus beginnt damit, dass man den Output-String \texttt{out} definiert und initialisiert.
+Nun geht man wie in~\ref{sec:idea}.\ beschrieben vor und startet oben links, wobei x = 0 und y = 0 gilt.\\
+\linebreak
+Folgendes geschieht nun solange $x \neq 0$ und $y \neq 0$:
+\begin{adjustwidth}{10px}{}
+\begin{itemize}
+\item Das aktuelle Pixel wird anhand der Koordinaten aus dem Bild abgerufen
+\item Das aktuelle Pixel wird nun siehe~\ref{sec:pixel analysis} analysiert.
+\item Nun wird das neue Zeichen an den Output-String angehangen. $\rightarrow$ \texttt{out.push(ch);}
+\item Als letztes wird wie in~\ref{sec:idea}.\ die x bzw.\ y Koordinate des neuen Pixels berechent.
+\subitem{Die Höhe bzw.\ Breite des Bildes stammt dabei vom Einlesen der Daten}
+\end{itemize}
+\end{adjustwidth}
+\vspace*{0.5cm}
+Schlussendlich wird noch der Gesamt-String \texttt{out} ausgegeben.

@@ -1,7 +1,15 @@
+use std::env;
 use image::{DynamicImage, GenericImageView, Rgba};
 
 fn main() {
-    let picture: DynamicImage = read_data();
+    let args: Vec<String> = env::args().collect();
+    let mut fixed_path = String::new();
+
+    if args.len() >= 2 {
+        fixed_path = args[1].clone();
+    }
+
+    let picture: DynamicImage = read_data(fixed_path);
 
     let mut out = String::new();
 
@@ -26,12 +34,20 @@ fn main() {
     println!("{}", out);
 }
 
-fn read_data() -> DynamicImage {
-    let mut filename = String::new();
-    std::io::stdin().read_line(&mut filename).unwrap();
-    println!("{}", filename);
+fn read_data(fixed_path: String) -> DynamicImage {
+    let mut input = String::new();
 
-    let img = image::open(filename.trim()).unwrap();
+    if fixed_path.is_empty() {
+        println!("Enter path to file:");
+        std::io::stdin().read_line(&mut input).unwrap();
+    } else {
+        input = fixed_path;
+    }
+
+    let file_path = input.trim();
+    println!("{}", file_path);
+
+    let img = image::open(file_path).unwrap();
 
     img
 }
